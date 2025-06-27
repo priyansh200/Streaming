@@ -22,7 +22,7 @@ const frontendURL = process.env.NODE_ENV === 'production'
 
 app.use(
   cors({
-    origin: 'https://streaming-psi-one.vercel.app',
+    origin: frontendURL,
     credentials: true,
   }),
 );
