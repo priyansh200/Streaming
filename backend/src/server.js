@@ -1,24 +1,29 @@
-import express from 'express';
-import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import 'dotenv/config';
+import express from 'express';
 import path from 'path';
 
 import authRoutes from './routes/auth.route.js';
-import userRoutes from './routes/user.route.js';
 import chatRoutes from './routes/chat.route.js';
+import userRoutes from './routes/user.route.js';
 
-import {connectDB} from './lib/db.js';
+import { connectDB } from './lib/db.js';
 
 const app = express();
 const PORT = process.env.PORT;
 
 const __dirname = path.resolve();
 
+// Simple CORS configuration
+const frontendURL = process.env.NODE_ENV === 'production'
+  ? process.env.FRONTEND_URL  // production me Vercel URL use hoga
+  : 'http://localhost:5173';  // development me local URL
+
 app.use(
   cors({
-    origin: 'http://localhost:5173',
-    credentials: true, // all
+    origin: frontendURL,
+    credentials: true,
   }),
 );
 
